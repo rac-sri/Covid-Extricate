@@ -1,7 +1,7 @@
 const axios = require("axios");
 const indiaTimeline = require("./apidata/indiaTimeline");
 const world = require("./apidata/worldTotalStat");
-
+const countryWise = require("./apidata/countryWise");
 require("dotenv").config();
 
 async function geturl(url) {
@@ -11,14 +11,10 @@ async function geturl(url) {
       return result.data;
     case "world":
       const result2 = await world();
-      console.log(result2.data);
       return result2.data;
-    // .then((response) => {
-    //   return response;
-    // })
-    // .catch((error) => {
-    //   return error;
-    // });
+    case "countryWise":
+      const result3 = await countryWise();
+      return result3.data.countries_stat;
   }
 }
 

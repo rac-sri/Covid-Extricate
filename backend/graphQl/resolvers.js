@@ -11,7 +11,7 @@ module.exports = {
       return link("world");
     },
     country() {
-      return link.country;
+      return link("countryWise");
     },
     history() {
       return link.history;

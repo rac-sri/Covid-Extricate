@@ -1,38 +1,39 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-  enum PetType {
-    CAT
-    DOG
+  type rapidapi {
+    world: World
+    country: String
+    history: String
+    historyCountry: String
+    IndiaDateWise: String
+    IndiaTimeline: [Indiatimeline]
   }
-  type User {
-    id: ID!
-    username: String!
-    pets: [Pet]!
+
+  type World {
+    total_cases: String
+    total_deaths: String
+    total_recovered: String
+    new_cases: String
+    new_deaths: String
+    statistic_taken_at: String
   }
-  type Pet {
-    id: ID!
-    type: PetType!
-    name: String!
-    owner: User!
-    img: String!
-    createdAt: Int!
+  type Indiatimeline {
+    dailyconfirmed: Int
+    dailydeceased: Int
+    dailyrecovered: Int
+    date: String
+    totalconfirmed: Int
+    totaldeceased: Int
+    totalrecovered: Int
   }
-  input NewPetInput {
-    name: String!
-    type: PetType!
-  }
-  input PetsInput {
-    type: PetType
-  }
+
   type Query {
-    user: User!
-    pets(input: PetsInput): [Pet]!
-    pet(id: ID!): Pet!
+    rapidapi(input: String!): rapidapi
   }
-  type Mutation {
-    addPet(input: NewPetInput!): Pet!
-  }
+  # type Mutation {
+  #   addPet(input: NewPetInput!): Pet!
+  # }
 `;
 
 module.exports = typeDefs;

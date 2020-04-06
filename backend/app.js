@@ -14,10 +14,10 @@ app.use(body.urlencoded({ extended: false }));
 app.use(cors());
 const mongoURI = "mongodb://localhost:27017/covidExtricate";
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection
-  .once("open", () => console.log("Connected to Mongodb instace"))
-  .on("error", () => console.log("Error connecting to Mongodb"));
+mongoose
+  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to Mongodb"))
+  .catch(() => console.log("Error Connecting to MongoDB"));
 
 // app.use(logger("combined"));
 

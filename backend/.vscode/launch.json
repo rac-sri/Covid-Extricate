@@ -7,10 +7,11 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "covidextract",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${file}",
-      "console": "integratedTerminal"
+      "program": "${workspaceFolder}/backend/bin/www",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}//backend/.env"
     }
   ]
 }

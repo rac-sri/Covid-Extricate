@@ -34,7 +34,7 @@ import {
   NavLink,
   Nav,
   Container,
-  Modal
+  Modal,
 } from "reactstrap";
 
 class AdminNavbar extends React.Component {
@@ -43,7 +43,7 @@ class AdminNavbar extends React.Component {
     this.state = {
       collapseOpen: false,
       modalSearch: false,
-      color: "navbar-transparent"
+      color: "navbar-transparent",
     };
   }
   componentDidMount() {
@@ -56,11 +56,11 @@ class AdminNavbar extends React.Component {
   updateColor = () => {
     if (window.innerWidth < 993 && this.state.collapseOpen) {
       this.setState({
-        color: "bg-white"
+        color: "bg-white",
       });
     } else {
       this.setState({
-        color: "navbar-transparent"
+        color: "navbar-transparent",
       });
     }
   };
@@ -68,21 +68,21 @@ class AdminNavbar extends React.Component {
   toggleCollapse = () => {
     if (this.state.collapseOpen) {
       this.setState({
-        color: "navbar-transparent"
+        color: "navbar-transparent",
       });
     } else {
       this.setState({
-        color: "bg-white"
+        color: "bg-white",
       });
     }
     this.setState({
-      collapseOpen: !this.state.collapseOpen
+      collapseOpen: !this.state.collapseOpen,
     });
   };
   // this function is to open the Search modal
   toggleModalSearch = () => {
     this.setState({
-      modalSearch: !this.state.modalSearch
+      modalSearch: !this.state.modalSearch,
     });
   };
   render() {
@@ -96,7 +96,7 @@ class AdminNavbar extends React.Component {
             <div className="navbar-wrapper">
               <div
                 className={classNames("navbar-toggle d-inline", {
-                  toggled: this.props.sidebarOpened
+                  toggled: this.props.sidebarOpened,
                 })}
               >
                 <button
@@ -109,7 +109,7 @@ class AdminNavbar extends React.Component {
                   <span className="navbar-toggler-bar bar3" />
                 </button>
               </div>
-              <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+              <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
                 {this.props.brandText}
               </NavbarBrand>
             </div>
@@ -141,52 +141,14 @@ class AdminNavbar extends React.Component {
                     <span className="d-lg-none d-md-block">Search</span>
                   </Button>
                 </InputGroup>
+
                 <UncontrolledDropdown nav>
                   <DropdownToggle
                     caret
                     color="default"
                     data-toggle="dropdown"
                     nav
-                  >
-                    <div className="notification d-none d-lg-block d-xl-block" />
-                    <i className="tim-icons icon-sound-wave" />
-                    <p className="d-lg-none">Notifications</p>
-                  </DropdownToggle>
-                  <DropdownMenu className="dropdown-navbar" right tag="ul">
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        Mike John responded to your email
-                      </DropdownItem>
-                    </NavLink>
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        You have 5 more tasks
-                      </DropdownItem>
-                    </NavLink>
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        Your friend Michael is in town
-                      </DropdownItem>
-                    </NavLink>
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        Another notification
-                      </DropdownItem>
-                    </NavLink>
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        Another one
-                      </DropdownItem>
-                    </NavLink>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-                <UncontrolledDropdown nav>
-                  <DropdownToggle
-                    caret
-                    color="default"
-                    data-toggle="dropdown"
-                    nav
-                    onClick={e => e.preventDefault()}
+                    onClick={(e) => e.preventDefault()}
                   >
                     <div className="photo">
                       <img alt="..." src={require("assets/img/anime3.png")} />

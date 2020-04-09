@@ -31,13 +31,13 @@ var routes = [
     layout: "/admin",
   },
 
-  {
-    path: "/map",
-    name: "Map",
-    icon: "tim-icons icon-pin",
-    component: Map,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/map",
+  //   name: "Map",
+  //   icon: "tim-icons icon-pin",
+  //   component: Map,
+  //   layout: "/admin",
+  // },
 
   {
     path: "/typography",

@@ -3,31 +3,19 @@ import { Card, CardHeader, CardBody, CardTitle } from "reactstrap";
 import { Line, Bar } from "react-chartjs-2";
 
 import chartData from "../variables/charData1.js";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 
-const GETLIST = gql`
-  {
-    rapidapi {
-      country {
-        country_name
-        cases
-        deaths
-      }
-    }
-  }
-`;
-const Graph = () => {
-  const data = useQuery(GETLIST);
-
-  if (data.loading) return <p>Loading...</p>;
-  if (data.error) return <p>ERROR</p>;
+const Graph = (props) => {
   var arr1 = [];
   var arr2 = [];
-  data.data.rapidapi.country.forEach((value, index) => {
-    arr1.push(value.country_name);
-    const str = value.cases.replace(",", "");
-    arr2.push(parseInt(str));
+  let recorddata = "";
+  props.data.forEach((value, index) => {
+    const date = value.record_date.substr(0, 10);
+    if (date != recorddata) {
+      arr1.push(date);
+      const str = value.total_cases.replace(",", "");
+      arr2.push(parseInt(str));
+      recorddata = date;
+    }
   });
   const ChartData = chartData(arr1.slice(0, 20), arr2.slice(0, 20));
   return (
@@ -36,12 +24,12 @@ const Graph = () => {
         <h5 className="card-category"></h5>
         <CardTitle tag="h3">
           <i className="tim-icons icon-delivery-fast text-primary" />
-          World Statistics
+          Total Cases (Graphical Representation)
         </CardTitle>
       </CardHeader>
       <CardBody>
         <div className="chart-area">
-          <Bar data={ChartData.data} options={ChartData.options} />
+          <Line data={ChartData.data} options={ChartData.options} />
         </div>
       </CardBody>
     </Card>

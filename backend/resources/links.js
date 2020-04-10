@@ -18,7 +18,6 @@ async function geturl(url, value) {
       return result3.data.countries_stat;
     case "historyCountry":
       const result4 = await countryTimeline(value);
-      console.log(result4.data);
       return result4.data.stat_by_country;
   }
 }

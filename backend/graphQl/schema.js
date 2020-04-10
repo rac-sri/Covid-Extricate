@@ -52,7 +52,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    rapidapi(input: String): rapidapi
+    rapidapi: rapidapi
   }
   # type Mutation {
   #   addPet(input: NewPetInput!): Pet!

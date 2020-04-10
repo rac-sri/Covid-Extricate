@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Query } from "react-apollo";
-import { isRegularExpressionLiteral } from "typescript";
 import { Col, Card, CardBody, Table } from "reactstrap";
 
 const GETLIST = gql`
   {
-    rapidapi(input: "world") {
+    rapidapi {
       world {
         total_cases
         total_deaths

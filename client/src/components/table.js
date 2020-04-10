@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 
 const GETLIST = gql`
   {
-    rapidapi(input: "medicine") {
+    rapidapi {
       country {
         country_name
         cases

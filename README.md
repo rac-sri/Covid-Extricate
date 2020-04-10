@@ -39,3 +39,5 @@ This project aims to ease the day-to-day life of people, doctors, institutions,
 * Need of money due to the pandamic? Create a donation camp describing your need and providing links to required  documents to proov the docs legit.
 
 ![](GithubImages/1.png)
+
+[note: current code has rapidapi links hardcoded. Its for easier demonstration purpose only. Ideally those should be hidden in the environment variables. The project will have more features like doctor login system etc. in future releases hence the backend is designed keeping things like that in mind.]

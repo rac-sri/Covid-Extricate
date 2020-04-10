@@ -177,7 +177,7 @@ class AdminNavbar extends React.Component {
             </Collapse>
           </Container>
         </Navbar>
-        <Modal
+        {/* <Modal
           modalClassName="modal-search"
           isOpen={this.state.modalSearch}
           toggle={this.toggleModalSearch}
@@ -194,7 +194,7 @@ class AdminNavbar extends React.Component {
               <i className="tim-icons icon-simple-remove" />
             </button>
           </div>
-        </Modal>
+        </Modal> */}
       </>
     );
   }

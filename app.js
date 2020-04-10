@@ -9,7 +9,6 @@ const session = require("express-session");
 const app = express();
 const server = require("./graphQl/integrate");
 const cors = require("cors");
-
 app.use(body.urlencoded({ extended: false }));
 app.use(cors());
 // const mongoURI = "mongodb://localhost:27017/covidExtricate";
@@ -20,7 +19,6 @@ const loc = path.join(__dirname,"build","index.html");
 //   .catch(() => console.log("Error Connecting to MongoDB"));
 
 // app.use(logger("combined"));
-app.use(express.static('build'))
 // app.use(
 //   session({
 //     resave: true,
@@ -35,8 +33,11 @@ app.use(express.static('build'))
 
 server.applyMiddleware({ app, path: "/api" });
 
-app.get("/", async (req, res) => {
-  res.sendFile(loc);
+app.get("/",  (req, res) => {
+  console.log(loc)
+  console.log("klfjsdlkf")
+  res.sendFile(__dirname+'/build/index.html');
 });
 
+app.listen(4000)
 module.exports = app;

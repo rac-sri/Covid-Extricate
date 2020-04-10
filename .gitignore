@@ -2,5 +2,5 @@
 backend/node_modules
 package-lock.json
 /build
-
+node_modules
 client/node_modules

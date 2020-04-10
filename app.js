@@ -13,7 +13,7 @@ const cors = require("cors");
 app.use(body.urlencoded({ extended: false }));
 app.use(cors());
 // const mongoURI = "mongodb://localhost:27017/covidExtricate";
-// const loc = path.join(__dirname,"build","index.html");
+const loc = path.join(__dirname,"build","index.html");
 // mongoose
 //   .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 //   .then(() => console.log("Connected to Mongodb"))

@@ -129,7 +129,7 @@ class AdminNavbar extends React.Component {
             </button>
             <Collapse navbar isOpen={this.state.collapseOpen}>
               <Nav className="ml-auto" navbar>
-                <InputGroup className="search-bar">
+                {/* <InputGroup className="search-bar">
                   <Button
                     color="link"
                     data-target="#searchModal"
@@ -140,7 +140,7 @@ class AdminNavbar extends React.Component {
                     <i className="tim-icons icon-zoom-split" />
                     <span className="d-lg-none d-md-block">Search</span>
                   </Button>
-                </InputGroup>
+                </InputGroup> */}
 
                 <UncontrolledDropdown nav>
                   <DropdownToggle
@@ -151,12 +151,15 @@ class AdminNavbar extends React.Component {
                     onClick={(e) => e.preventDefault()}
                   >
                     <div className="photo">
-                      <img alt="..." src={require("assets/img/anime3.png")} />
+                      <img
+                        alt="..."
+                        src={require("assets/img/react-logo.png")}
+                      />
                     </div>
-                    <b className="caret d-none d-lg-block d-xl-block" />
-                    <p className="d-lg-none">Log out</p>
+                    {/* <b className="caret d-none d-lg-block d-xl-block" />
+                    <p className="d-lg-none">Log out</p> */}
                   </DropdownToggle>
-                  <DropdownMenu className="dropdown-navbar" right tag="ul">
+                  {/* <DropdownMenu className="dropdown-navbar" right tag="ul">
                     <NavLink tag="li">
                       <DropdownItem className="nav-item">Profile</DropdownItem>
                     </NavLink>
@@ -167,7 +170,7 @@ class AdminNavbar extends React.Component {
                     <NavLink tag="li">
                       <DropdownItem className="nav-item">Log out</DropdownItem>
                     </NavLink>
-                  </DropdownMenu>
+                  </DropdownMenu> */}
                 </UncontrolledDropdown>
                 <li className="separator d-lg-none" />
               </Nav>

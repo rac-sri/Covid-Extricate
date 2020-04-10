@@ -16,8 +16,8 @@ module.exports = {
     history() {
       return link.history;
     },
-    historyCountry() {
-      return link.historyCountry;
+    historyCountry(_, { input }, __) {
+      return link("historyCountry", input);
     },
     IndiaDateWise() {
       return link.historyCountry;

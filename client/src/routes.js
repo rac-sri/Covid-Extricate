@@ -19,7 +19,7 @@ import Dashboard from "views/Dashboard.js";
 import Map from "views/Map.js";
 import Notifications from "views/Notifications.js";
 import TableList from "views/TableList.js";
-import Typography from "views/Typography.js";
+import Typography from "views/TypographyCopy.js";
 import UserProfile from "views/UserProfile.js";
 
 var routes = [
@@ -53,12 +53,12 @@ var routes = [
     component: Notifications,
     layout: "/admin",
   },
-  {
-    path: "/user-profile",
-    name: "Doctor",
-    icon: "tim-icons icon-single-02",
-    component: UserProfile,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/user-profile",
+  //   name: "Doctor",
+  //   icon: "tim-icons icon-single-02",
+  //   component: UserProfile,
+  //   layout: "/admin",
+  // },
 ];
 export default routes;

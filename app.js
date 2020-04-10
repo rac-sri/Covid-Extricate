@@ -35,7 +35,7 @@ app.use(express.static('build'))
 
 server.applyMiddleware({ app, path: "/api" });
 
-app.get("/", async (req, res) => {
+app.get("/*", async (req, res) => {
   console.log(loc)
   console.log("sdljfkdslkfjlk")
   res.sendFile(loc);

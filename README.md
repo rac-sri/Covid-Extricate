@@ -4,12 +4,9 @@
 ##  Installation
 ```
 1. Clone the Repository.
-2. cd backend
-   - npm i
+2. npm i
    - npm start
-3. cd ../client
-   - npm i 
-   - npm start
+
 ```  
 ## About This Project
 This project aims to ease the day-to-day life of people, doctors, institutions, 

@@ -17,7 +17,10 @@ const Graph = (props) => {
       recorddata = date;
     }
   });
-  const ChartData = chartData(arr1.slice(0, 20), arr2.slice(0, 20));
+  const ChartData = chartData(
+    arr1.slice(0, 20).reverse(),
+    arr2.slice(0, 20).reverse()
+  );
   return (
     <Card className="card-chart">
       <CardHeader>

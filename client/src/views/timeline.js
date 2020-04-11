@@ -36,11 +36,17 @@ const Timeline = (props) => {
     variables: { inputString: props.country },
   });
   if (query.loading) return <div className="content">Loading...</div>;
-  console.log(query.data);
+  let data = "";
   if (query.data.rapidapi.historyCountry) {
-    var array = query.data.rapidapi.historyCountry.reverse().slice(0, 300);
+    var array = query.data.rapidapi.historyCountry
+      .reverse()
+      .filter((element) => {
+        if (element.record_date.substr(0, 10) !== data) {
+          data = element.record_date.substr(0, 10);
+          return element;
+        }
+      });
   } else array = [];
-  console.log(array);
   return (
     <>
       <div className="content">
@@ -49,7 +55,7 @@ const Timeline = (props) => {
           <Col md="12">
             <Card className="card-tasks">
               <CardHeader>
-                <CardTitle tag="h4">Timeline (last 300 updates)</CardTitle>
+                <CardTitle tag="h4">Timeline</CardTitle>
               </CardHeader>
               <CardBody>
                 <div className="table-full-width table-responsive">

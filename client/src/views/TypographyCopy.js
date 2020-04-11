@@ -10,7 +10,7 @@ function TypographyContainer() {
       <div className="content">
         <InputGroup>
           <Input
-            placeholder="username"
+            placeholder="Country Name"
             value={values.values}
             onChange={(e) => {
               update({ values: e.target.value, state: false });

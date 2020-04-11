@@ -3,7 +3,7 @@
 
 
 ## Live Demo
-[demo](covidextricate.herokuapp.com)
+[demo](https://covidextricate.herokuapp.com)
 
 ##  Installation
 ```

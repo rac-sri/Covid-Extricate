@@ -41,8 +41,9 @@ const TableComp = (props) => {
                 <thead className="text-primary">
                   <tr>
                     <th>Country</th>
-                    <th>Deaths</th>
-                    <th>Total Recovered</th>
+                    <th>Total Cases</th>
+                    <th>Total Deaths</th>
+                    <th className="text-center">Total Recovered</th>
                     <th className="text-center">New Deaths</th>
                     <th className="text-center">New Cases</th>
                     <th className="text-center">Serious/Critical</th>
@@ -67,6 +68,9 @@ const TableComp = (props) => {
                           {value.serious_critical}
                         </td>
                         <td className="text-center">{value.active_cases}</td>
+                        <td className="text-center">
+                          {value.total_cases_per_1m_population}
+                        </td>
                       </tr>
                     );
                   })}

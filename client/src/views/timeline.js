@@ -38,7 +38,7 @@ const Timeline = (props) => {
   if (query.loading) return <div className="content">Loading...</div>;
   console.log(query.data);
   if (query.data.rapidapi.historyCountry) {
-    var array = query.data.rapidapi.historyCountry.reverse().slice(300);
+    var array = query.data.rapidapi.historyCountry.reverse().slice(0, 300);
   } else array = [];
   console.log(array);
   return (

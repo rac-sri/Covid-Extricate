@@ -21,6 +21,7 @@ import Notifications from "views/Notifications.js";
 import TableList from "views/TableList.js";
 import Typography from "views/TypographyCopy.js";
 import UserProfile from "views/UserProfile.js";
+import UploadImage from "views/UploadImage";
 
 var routes = [
   {
@@ -53,12 +54,12 @@ var routes = [
     component: Notifications,
     layout: "/admin",
   },
-  // {
-  //   path: "/user-profile",
-  //   name: "Doctor",
-  //   icon: "tim-icons icon-single-02",
-  //   component: UserProfile,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/user-profile",
+    name: "Report Voilation",
+    icon: "tim-icons icon-single-02",
+    component: UploadImage,
+    layout: "/admin",
+  },
 ];
 export default routes;

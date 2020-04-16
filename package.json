@@ -26,6 +26,8 @@
     "express-session": "^1.17.0",
     "express-sessions": "^1.0.6",
     "http-errors": "^1.7.3",
+    "ipfs-api": "^26.1.2",
+    "ipfs-http-client": "^43.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
     "morgan": "^1.10.0",

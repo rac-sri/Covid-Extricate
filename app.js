@@ -12,7 +12,7 @@ const cors = require("cors");
 
 app.use(body.urlencoded({ extended: false }));
 app.use(cors());
-const mongoURI = "mongodb://localhost:27017/covidExtricate";
+const mongoURI = "mongodb+srv://rachit2501:covidextricate@cluster0-hqjrg.mongodb.net/test?retryWrites=true&w=majority";
 const loc = path.join(__dirname,"build","index.html");
 mongoose
   .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -4,7 +4,7 @@ import { HttpLink } from "apollo-link-http";
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: "http://covidextricate.herokuapp.com/api",
+  uri: "https://covidextricate.herokuapp.com/api",
 });
 
 const client = new ApolloClient({

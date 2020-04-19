@@ -7,7 +7,14 @@ import fileReaderPullStream from "pull-file-reader";
 import ipfs from "../ethereum/ipfs";
 import { Table } from "reactstrap";
 import Moment from "react-moment";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
+const query = gql`
+  query idVerify($id: String!) {
+    idVerify(input: $id)
+  }
+`;
 class UploadImage extends Component {
   constructor(props) {
     super(props);
@@ -18,16 +25,17 @@ class UploadImage extends Component {
       web3,
       location: "",
       ipfsHash: "",
-      buffer: null
+      buffer: null,
+      value: "",
+      submit: false,
     };
   }
 
   componentDidMount() {
-    
     web3.eth.getAccounts((err, accounts) => {
       this.setState({ accounts: accounts });
-      console.log("ACCOUNTSSSS", this.state.accounts)
-      
+      console.log("ACCOUNTSSSS", this.state.accounts);
+
       this.setState({
         contract: parent,
         web3,
@@ -94,15 +102,15 @@ class UploadImage extends Component {
 
     try {
       await ipfs.add(buffer, (err, ipfsHash) => {
-        console.log(err,ipfsHash);
-        //setState by setting ipfsHash to ipfsHash[0].hash 
+        console.log(err, ipfsHash);
+        //setState by setting ipfsHash to ipfsHash[0].hash
         this.setState({ ipfsHash: ipfsHash[0].hash });
         let fileuploaded = contract.methods
           .newReport(location, this.state.ipfsHash)
           .send({ from: accounts[0], gas: 300000 });
 
         console.log(fileuploaded);
-      })
+      });
       //debugger;
     } catch (error) {
       console.log(error);
@@ -111,6 +119,11 @@ class UploadImage extends Component {
 
   setField = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ submit: !this.state.submit });
   };
 
   render() {
@@ -175,6 +188,44 @@ class UploadImage extends Component {
               : null}
           </tbody>
         </Table>
+        <br></br>
+        <br></br>
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label htmlFor="location">Register</label>
+            <input
+              type="text"
+              className="form-control"
+              id="location"
+              aria-describedby="emailHelp"
+              placeholder="Enter Valid id"
+              name="location"
+              onChange={(e) =>
+                this.setState({ submit: false, value: e.target.value })
+              }
+              value={this.state.value}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </form>
+
+        {this.state.submit && (
+          <Query query={query} variables={{ id: this.state.value }}>
+            {({ loading, error, data }) => {
+              if (loading) return "Loading...";
+              if (error) return `Error ${error.message}`;
+              return (
+                <>
+                  {" "}
+                  <h5>Your PassToken:</h5>
+                  <p>{data.idVerify}</p>
+                </>
+              );
+            }}
+          </Query>
+        )}
       </div>
     );
   }

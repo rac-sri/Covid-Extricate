@@ -53,9 +53,10 @@ const typeDefs = gql`
 
   type Query {
     rapidapi: rapidapi
+    idVerify(input: String!): String
   }
   # type Mutation {
-  #   addPet(input: NewPetInput!): Pet!
+  #   idVerify(input: String!): String
   # }
 `;
 

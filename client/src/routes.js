@@ -56,7 +56,7 @@ var routes = [
   },
   {
     path: "/user-profile",
-    name: "Report Voilation",
+    name: "Report Violation",
     icon: "tim-icons icon-single-02",
     component: UploadImage,
     layout: "/admin",

@@ -1,20 +1,5 @@
 [
 	{
-		"constant": true,
-		"inputs": [],
-		"name": "getReportsCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "count",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"constant": false,
 		"inputs": [
 			{
@@ -32,6 +17,42 @@
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_reportId",
+				"type": "uint256"
+			}
+		],
+		"name": "setActionTaken",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getReportsCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "count",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -79,6 +100,11 @@
 				"internalType": "uint256",
 				"name": "reportedAt",
 				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "actionTaken",
+				"type": "bool"
 			}
 		],
 		"payable": false,

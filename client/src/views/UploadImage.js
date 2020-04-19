@@ -14,7 +14,13 @@ const query = gql`
   query idVerify($id: String!) {
     idVerify(input: $id)
   }
-`;
+`
+const getHash = gql`
+  {
+    idVerify
+  }
+`
+
 class UploadImage extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +34,7 @@ class UploadImage extends Component {
       buffer: null,
       value: "",
       submit: false,
+      isOwner: false
     };
   }
 
@@ -40,7 +47,20 @@ class UploadImage extends Component {
         contract: parent,
         web3,
       });
-      this.getFiles();
+
+      this.state.contract.methods
+        .owner()
+        .call({ from: accounts[0] })
+        .then(owner => {
+          console.log(owner, "OWNER")
+          if(owner === accounts[0])
+          {
+            this.setState({
+              isOwner: true
+            })
+          }
+          this.getFiles();
+        })
     });
   }
 
@@ -126,12 +146,20 @@ class UploadImage extends Component {
     this.setState({ submit: !this.state.submit });
   };
 
+  takeAction = async (id) => {
+    const {contract, accounts} = this.state
+    await contract.methods
+          .setActionTaken(id)
+          .send({ from: accounts[0], gas: 300000 });
+  }
+
   render() {
     const { solidityDrive } = this.state;
     return (
       <div className="content">
         <div className="card">
           <div className="card-body">
+            <h3>Submit New Act of Violation</h3>
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <label htmlFor="location">Location Address</label>
@@ -146,10 +174,11 @@ class UploadImage extends Component {
                   value={this.state.location}
                 />
               </div>
+              <br/>
               <input type="file" onChange={this.captureFile} />
               <div
                 style={{
-                  height: "200px",
+                  height: "50px",
                   width: "100%",
                 }}
               >
@@ -161,35 +190,42 @@ class UploadImage extends Component {
             </form>
           </div>
         </div>
-
+        <h3>Current Reports:</h3>
         <Table className="tablesrter" responsive>
           <thead className="text-primary">
             <tr>
-              <th>File Name</th>
               <th>Date</th>
+              <th>Location</th>
+              <th>Image Proof</th>
+              <th>Action Taken?</th>
             </tr>
           </thead>
           <tbody>
             {solidityDrive !== []
               ? solidityDrive.map((item, key) => (
                   <tr key={key}>
+                  <td className="text-left">
+                      <Moment format="YYYY/MM/DD" unix>
+                        {item.reportedAt}
+                      </Moment>
+                    </td>
+                    <td className="text-left">
+                      {item.location}
+                    </td>
                     <td className="text-left">
                       <a href={"https://ipfs.io/ipfs/" + item.proof_ipfs_hash}>
                         VIEW PROOF
                       </a>
                     </td>
-                    <td className="text-right">
-                      <Moment format="YYYY/MM/DD" unix>
-                        {item.reportedAt}
-                      </Moment>
+                    <td>
+                      {this.state.isOwner && !item.actionTaken ? (<button onClick={() => this.takeAction(key)} className="btn">Take Action</button>) : (item.actionTaken ? ("Yes") : ("No"))}
                     </td>
                   </tr>
                 ))
               : null}
           </tbody>
         </Table>
-        <br></br>
-        <br></br>
+        
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label htmlFor="location">Register</label>
@@ -198,7 +234,7 @@ class UploadImage extends Component {
               className="form-control"
               id="location"
               aria-describedby="emailHelp"
-              placeholder="Enter Valid id"
+              placeholder="Enter Aadhaar Number"
               name="location"
               onChange={(e) =>
                 this.setState({ submit: false, value: e.target.value })

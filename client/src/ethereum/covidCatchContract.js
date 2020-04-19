@@ -1,7 +1,7 @@
 import web3 from "./web3";
 
 const abi = require("./build/covidCatchABI.json");
-const address = "0x8531C910912E8C6B6c500CE2bA7AE985aA545427";
+const address = "0xC191bA990Edb1fB52E9b3Bc1B97F38A2349e76d5";
 
 const instance = new web3.eth.Contract(
   abi,

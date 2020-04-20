@@ -14,12 +14,12 @@ const query = gql`
   query idVerify($id: String!) {
     idVerify(input: $id)
   }
-`
+`;
 const getHash = gql`
   {
     idVerify
   }
-`
+`;
 
 class UploadImage extends Component {
   constructor(props) {
@@ -34,7 +34,9 @@ class UploadImage extends Component {
       buffer: null,
       value: "",
       submit: false,
-      isOwner: false
+      isOwner: false,
+      userId: "",
+      userToken: "",
     };
   }
 
@@ -51,16 +53,15 @@ class UploadImage extends Component {
       this.state.contract.methods
         .owner()
         .call({ from: accounts[0] })
-        .then(owner => {
-          console.log(owner, "OWNER")
-          if(owner === accounts[0])
-          {
+        .then((owner) => {
+          console.log(owner, "OWNER");
+          if (owner === accounts[0]) {
             this.setState({
-              isOwner: true
-            })
+              isOwner: true,
+            });
           }
           this.getFiles();
-        })
+        });
     });
   }
 
@@ -118,7 +119,10 @@ class UploadImage extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { accounts, contract, location, buffer } = this.state;
+    const { accounts, contract, location, buffer, userId } = this.state;
+
+    await contract.methods.getMyUserId().call()
+    .then((res) => console.log(res, "IDDDDD"))
 
     try {
       await ipfs.add(buffer, (err, ipfsHash) => {
@@ -147,11 +151,11 @@ class UploadImage extends Component {
   };
 
   takeAction = async (id) => {
-    const {contract, accounts} = this.state
+    const { contract, accounts } = this.state;
     await contract.methods
-          .setActionTaken(id)
-          .send({ from: accounts[0], gas: 300000 });
-  }
+      .setActionTaken(id)
+      .send({ from: accounts[0], gas: 300000 });
+  };
 
   render() {
     const { solidityDrive } = this.state;
@@ -162,6 +166,17 @@ class UploadImage extends Component {
             <h3>Submit New Act of Violation</h3>
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
+                <label htmlFor="userId">Aadhaar ID:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="userId"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Your Aadhaar ID "
+                  name="userId"
+                  onChange={this.setField}
+                  value={this.state.userId}
+                />
                 <label htmlFor="location">Location Address</label>
                 <input
                   type="text"
@@ -174,7 +189,7 @@ class UploadImage extends Component {
                   value={this.state.location}
                 />
               </div>
-              <br/>
+              <br />
               <input type="file" onChange={this.captureFile} />
               <div
                 style={{
@@ -204,28 +219,36 @@ class UploadImage extends Component {
             {solidityDrive !== []
               ? solidityDrive.map((item, key) => (
                   <tr key={key}>
-                  <td className="text-left">
+                    <td className="text-left">
                       <Moment format="YYYY/MM/DD" unix>
                         {item.reportedAt}
                       </Moment>
                     </td>
-                    <td className="text-left">
-                      {item.location}
-                    </td>
+                    <td className="text-left">{item.location}</td>
                     <td className="text-left">
                       <a href={"https://ipfs.io/ipfs/" + item.proof_ipfs_hash}>
                         VIEW PROOF
                       </a>
                     </td>
                     <td>
-                      {this.state.isOwner && !item.actionTaken ? (<button onClick={() => this.takeAction(key)} className="btn">Take Action</button>) : (item.actionTaken ? ("Yes") : ("No"))}
+                      {this.state.isOwner && !item.actionTaken ? (
+                        <button
+                          onClick={() => this.takeAction(key)}
+                          className="btn"
+                        >
+                          Take Action
+                        </button>
+                      ) : item.actionTaken ? (
+                        "Yes"
+                      ) : (
+                        "No"
+                      )}
                     </td>
                   </tr>
                 ))
               : null}
           </tbody>
         </Table>
-        
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label htmlFor="location">Register</label>
@@ -246,22 +269,27 @@ class UploadImage extends Component {
             Submit
           </button>
         </form>
-
         {this.state.submit && (
           <Query query={query} variables={{ id: this.state.value }}>
             {({ loading, error, data }) => {
               if (loading) return "Loading...";
               if (error) return `Error ${error.message}`;
-              return (
-                <>
-                  {" "}
-                  <h5>Your PassToken:</h5>
-                  <p>{data.idVerify}</p>
-                </>
-              );
+              this.state.contract.methods
+                .addUserId(data.idVerify)
+                .send({ from: this.state.accounts[0], gas: 300000 });
+              this.setState({ submit: false, userToken: data.idVerify });
+              return true;
             }}
           </Query>
         )}
+        {this.state.userToken && (
+          <>
+            {" "}
+            <h5>Your PassToken:</h5>
+            <p>{this.state.userToken}</p>
+          </>
+        )}
+        
       </div>
     );
   }

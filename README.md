@@ -16,7 +16,7 @@
 This project aims to ease the day-to-day life of people, doctors, institutions, 
 1. All latest updates regarding the pandemic in one place.
 2. Need for money? Raise a **Donation camp**.
-3. Doctor? Get information in one place and also spread necessary information.
+3. Repost Lockdown Violation: Take picture and report a lockdown violation committed by someone nearby you, in order to help create the better discipline to control the spread of the disease.
 
 ## Technology Used
 * ReactJS
